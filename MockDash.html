@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản lý phòng khách sạn</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="MockDash.css">
+</head>
+<body>
+    <div class="sidebar">
+        <h2>Nice Dream</h2>
+        <ul>
+            <li>
+                <a href="#" onclick="showSection('hotel-room-management')">
+                    <i class="fas fa-box"></i>
+                    Quản lí phòng khách sạn
+                </a>
+            </li>
+            <li>
+                <a href="#" onclick="showSection('user-management')">
+                    <i class="fas fa-users"></i>
+                    Quản lí user
+                </a>
+            </li>
+            <li>
+                <a href="#" onclick="showSection('admin-management')">
+                    <i class="fas fa-user-shield"></i>
+                    Quản lí admin
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div class="main-content">
+        <div class="header">
+            <input id="search-input" placeholder="Search for..." type="text" onkeypress="handleSearch(event)"/>
+            <i class="fas fa-user"></i>
+        </div>
+        <div class="content" id="hotel-room-management">
+            <h2>Quản lý phòng khách sạn</h2>
+            <div class="tabs">
+                <button class="tab-button active" onclick="showTab('all-rooms')">Tất cả các phòng</button>
+                <button class="tab-button" onclick="showTab('booked-rooms')">Phòng đã đặt</button>
+            </div>
+            <div class="tab-content" id="all-rooms">
+                <button class="btn-create" onclick="toggleForm()">
+                    <i class="fas fa-plus"></i>
+                    Create
+                </button>
+                <div class="form-container" id="form-container">
+                    <h3>Thêm phòng mới</h3>
+                    <input id="room-name" placeholder="Tên phòng" type="text"/>
+                    <input id="room-price" placeholder="Giá phòng" type="text"/>
+                    <input id="room-bed-type" placeholder="Loại giường" type="text"/>
+                    <input id="room-area" placeholder="Diện tích" type="text"/>
+                    <input id="room-view" placeholder="Tầm nhìn" type="text"/>
+                    <input id="room-amenities" placeholder="Tiện nghi" type="text"/>
+                    <input id="room-image" type="file" accept="image/*"/>
+                    <button onclick="addRoom()">Thêm phòng</button>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Tên phòng</th>
+                            <th>Giá phòng</th>
+                            <th>Loại giường</th>
+                            <th>Diện tích</th>
+                            <th>Tầm nhìn</th>
+                            <th>Tiện nghi</th>
+                            <th>Ảnh phòng</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="room-data">
+                        <tr>
+                            <td class="no-data" colspan="9">Không có dữ liệu</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="tab-content" id="booked-rooms" style="display: none;">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Tên phòng</th>
+                            <th>Giá phòng</th>
+                            <th>Loại giường</th>
+                            <th>Diện tích</th>
+                            <th>Tầm nhìn</th>
+                            <th>Tiện nghi</th>
+                            <th>Ảnh phòng</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="booked-room-data">
+                        <tr>
+                            <td class="no-data" colspan="9">Không có dữ liệu</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p id="total-booked-rooms">Tổng số phòng đã đặt: 0</p>
+            </div>
+        </div>
+        <div class="content" id="user-management" style="display: none;">
+            <h2>Quản lý user</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Họ và tên</th>
+                        <th>Số điện thoại</th>
+                        <th>Email</th>
+                        <th>Giới tính</th>
+                        <th>Ngày sinh</th>
+                        <th>Địa chỉ</th>
+                        <th>Tên đăng nhập</th>
+                        <th>Mật khẩu</th>
+                        <th>Role</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="user-data">
+                    <tr>
+                        <td class="no-data" colspan="11">Không có dữ liệu</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="content" id="admin-management" style="display: none;">
+            <h2>Quản lý admin</h2>
+            <p>Đây là trang quản lý admin.</p>
+        </div>
+        <div class="modal" id="delete-modal">
+            <div class="modal-content">
+                <h3>Bạn có chắc chắn muốn xóa phòng này không?</h3>
+                <button onclick="confirmDelete()">Xóa</button>
+                <button class="cancel-btn" onclick="closeModal()">Hủy</button>
+            </div>
+        </div>
+    </div>
+    <script src="MockDash.js"></script>
+</body>
+</html>
